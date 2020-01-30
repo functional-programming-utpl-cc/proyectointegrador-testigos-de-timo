@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html data-lt-installed="true" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Nuestros CSSs personalizados:  -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Código de vegas -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.9.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.2.1"></script>
+
+    <title> Distribucion de Hashtags - UTPL</title>
+
+    <style media="screen">
+        /* Add space between Vega-Embed links  */
+        .vega-actions a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Barra de navegacion -->
+    <nav class="navbar navbar-light navbar-top"  role="navigation">
+        <div class="container">
+            <!-- Logo and responsive toggle -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <p class="navbar-brand">
+                    <b>UTPL</b>
+                </p>
+            </div>
+            <!-- Barra de navegación -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTiempo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Tweets por Tiempo
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownTiempo">
+                          <a class="dropdown-item" href="GraficasTweetsPorDia.html">Día</a><br>
+                          <a class="dropdown-item" href="GraficasTweetsPorHora.html">Hora</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="GraficasApps.html">Apps</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDistribucion" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Distribución
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownDistribucion">
+                          <a class="dropdown-item" href="GraficasDistribucionHashtags.html">Hashtags</a><br>
+                          <a class="dropdown-item" href="GraficasDistribucionMenciones.html">Menciones</a>
+                          <a class="dropdown-item" href="GraficasDistribucionURLs.html">URLs</a><br>
+                          <a class="dropdown-item" href="GraficasDistribucionMedia.html">Media</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="GraficasCorrelacion.html">Correlación</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownComportamiento" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Comportamiento
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownComportamiento">
+                          <a class="dropdown-item" href="GraficasComportamientoUsuarios.html">Usuarios</a><br>
+                          <a class="dropdown-item" href="GraficasComportamientoMenciones.html">Menciones</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container">
+
+        <div class="row2">
+            <center><h1 class="page-header"><FONT SIZE=6><b>Distribución de Hashtags</b></FONT></h1></center>
+        </div>
+        <div class="row2">
+                <p>En el siguiente gráfico podemos observar el número de hashtags publicados por tweet. En el eje <b>X</b> tenemos el número de hashtags por tweet y en <b>Y</b> tenemos la distribución de los hashtags. En este gráfico podemos destacar que los usuarios publican de 0 a 2 hashtags por tweet.</p>
+        </div>
+        <div class="box2">
+            <div id="graficaDistribucionHashtags"></div>
+        </div>
+    </div>
+
+    <script>
+
+    const graficaHastags = {
+        $schema: "https://vega.github.io/schema/vega-lite/v4.json",
+        data: {
+                "url": "FuentesCSV/4DistribucionDeHashtags.csv"
+            },
+        "width": 500,
+        "height": 400,
+        mark: "bar",
+        encoding: {
+          y: {
+            field: "hashtags",
+            type: "ordinal",
+            title: "Número de Hashtags por Tweet",
+            sort: "-x"
+          },
+          x: {
+            field: "count",
+            type: "quantitative",
+            title: "Distribución de hashtags"
+          }
+        }
+      };
+    vegaEmbed('#graficaDistribucionHashtags', graficaHastags);
+    </script>
+        
+    <!-- jQuery -->
+    <script src="css/jquery-1.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="css/bootstrap.js"></script>
+   
+    </body>
+</html>
